@@ -3,7 +3,7 @@
 
 Name: yajl
 Version: 2.1.0
-Release: 11%{?dist}
+Release: 13%{?dist}
 Summary: Yet Another JSON Library (YAJL)
 
 License: ISC
@@ -24,6 +24,9 @@ Patch2: %{name}-%{version}-pkgconfig-includedir.patch
 Patch3: %{name}-%{version}-test-location.patch
 Patch4: %{name}-%{version}-dynlink-binaries.patch
 Patch5: https://github.com/containers/yajl/commit/49923ccb2143e36850bcdeb781e2bcdf5ce22f15.patch
+Patch6: https://github.com/openEuler-BaseService/yajl/commit/3d65cb0c6db4d433e5e42ee7d91d8a04e21337cf.patch
+Patch7: https://github.com/openEuler-BaseService/yajl/commit/23a122eddaa28165a6c219000adcc31ff9a8a698.patch
+Patch8: yajl-2.1.0-CVE-2022-24795.patch
 
 BuildRequires:  gcc
 BuildRequires: cmake
@@ -52,6 +55,9 @@ necessary for developing against the YAJL library
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
 
 %build
 # NB, we are not using upstream's 'configure'/'make'
@@ -96,6 +102,14 @@ cd test
 
 
 %changelog
+* Fri Jan 05 2024 Jindrich Novy <jnovy@redhat.com> - 2.1.0-13
+- fix CVE-2022-24795
+- Related: RHEL-18753
+
+* Wed Jul 12 2023 Jindrich Novy <jnovy@redhat.com> - 2.1.0-12
+- fix CVE-2023-33460
+- Resolves: #2221252
+
 * Wed Apr 27 2022 Jindrich Novy <jnovy@redhat.com> - 2.1.0-11
 - fix CVE-2022-24795
 - Related: #2061390
